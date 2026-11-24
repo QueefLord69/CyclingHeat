@@ -457,7 +457,7 @@ byId("theme").addEventListener("click", () => {
 async function loadArchive() {
   byId("play").disabled = true;
   try {
-    const response = await fetch("./routes-index.json");
+    const response = await fetch("./routes-index.json", { cache: "no-cache" });
     if (!response.ok) throw new Error("Route index returned " + response.status);
     routes = await response.json();
     routes.sort((a, b) => (b.date || "").localeCompare(a.date || "") || a.name.localeCompare(b.name));
@@ -466,6 +466,8 @@ async function loadArchive() {
     populateFilter("category", "All categories", routes.map(route => route.category).sort());
     byId("demoBadge").hidden = !routes.some(route => route.demo);
     renderStats();
+    selected = routes.find(route => !route.demo) || null;
+    if (selected) mode = "single";
     applyFilters();
   } catch (error) {
     byId("count").textContent = "Unavailable";
