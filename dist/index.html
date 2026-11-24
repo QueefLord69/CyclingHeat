@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A cycling route archive for the roads less ridden. Explore the map, compare climbs and download GPX tracks.">
+<title>Cycling Up That Hill — Route Archive</title>
+<link rel="stylesheet" href="./leaflet.css"><link rel="stylesheet" href="./style.css">
+<script defer src="./leaflet.js"></script><script defer src="./leaflet-heat.js"></script><script defer src="./app.js"></script>
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="./"><span class="mark" aria-hidden="true">▲</span><span>Cycling Up That Hill<small>ROUTE ARCHIVE</small></span></a>
+  <div class="topActions"><span class="sample" id="demoBadge" hidden>Demo data</span><button id="theme" class="icon" type="button" aria-label="Switch to light mode" title="Switch to light mode">☀</button></div>
+</header>
+<main>
+  <aside class="sidebar" aria-label="Route archive">
+    <div class="archiveHead">
+      <h1>Route archive</h1>
+      <div class="stats" id="stats" aria-label="Archive totals"></div>
+      <label class="search"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Search routes" aria-label="Search by route name"></label>
+      <div class="filters">
+        <label>Year<select id="year"></select></label>
+        <label>Country<select id="country"></select></label>
+        <label>Distance<select id="distance">
+          <option value="">Any distance</option><option value="short">Under 25 km</option>
+          <option value="medium">25–49 km</option><option value="long">50 km and up</option>
+        </select></label>
+        <label>Category<select id="category"></select></label>
+      </div>
+    </div>
+    <section class="routeSection" aria-labelledby="listTitle">
+      <div class="listHead"><h2 id="listTitle">Routes</h2><span id="count" aria-live="polite">Loading…</span></div>
+      <div id="list"></div>
+    </section>
+  </aside>
+  <section class="mapShell" id="mapShell" aria-label="Interactive cycling map">
+    <div id="map" aria-label="OpenStreetMap route map"></div>
+    <div class="mapControls">
+      <div class="mode" role="group" aria-label="Map view">
+        <button data-mode="all" aria-pressed="true" type="button">All routes</button>
+        <button data-mode="single" aria-pressed="false" type="button">Selected</button>
+        <button data-mode="heat" aria-pressed="false" type="button">Heatmap</button>
+      </div>
+      <button type="button" id="fullscreen" class="icon" aria-label="Enter fullscreen map" title="Enter fullscreen map">⛶</button>
+    </div>
+    <div class="mapTools"><button class="icon" id="fit" type="button" title="Fit visible routes" aria-label="Fit visible routes">◎</button></div>
+    <section id="detail" class="detail" aria-label="Selected route" hidden></section>
+    <div class="timeline">
+      <button id="play" type="button"><span aria-hidden="true">▶</span> Replay archive</button>
+      <span id="playStatus" aria-live="polite"></span>
+    </div>
+  </section>
+</main>
+</body>
+</html>
